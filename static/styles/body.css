@@ -7,8 +7,8 @@ body {
   margin: 0;
   padding: 0;
   /*height: 100%;*/
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 20px;
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /*font-size: 20px; */
   display: flex;
   flex-direction: column;
   background: rgb(171, 219, 243) url(../images/solar-background.jpg);
@@ -29,6 +29,7 @@ body {
   /*border: 1px red solid;*/
   text-shadow: 2px 2px grey;
 }
+
 .main input {
   font-size: 20px;
   border: none;
