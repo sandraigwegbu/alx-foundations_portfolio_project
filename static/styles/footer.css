@@ -1,0 +1,13 @@
+footer {
+  background-color: rgb(75, 150, 32);
+  color: blue;
+  height: 100px;
+  width: 100%;
+  /*border-top: 1px solid #cccccc;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  position: fixed;
+}

@@ -1,0 +1,10 @@
+header {
+  height: 150px;
+  /*width: 100%;*/
+  /*border-bottom: 1px solid #cccccc;*/
+  background: url(../images/earthrise.png);
+  background-repeat: no-repeat;
+  /*background-position: 20px center;*/
+  background-size: cover;
+  /*flex-shrink: 0;*/
+}

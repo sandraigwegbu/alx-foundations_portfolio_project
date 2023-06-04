@@ -1,0 +1,89 @@
+{
+  "results": [
+    {
+      "address_components": [
+        {
+          "long_name": "75",
+          "short_name": "75",
+          "types": [
+            "street_number"
+          ]
+        },
+        {
+          "long_name": "Links View",
+          "short_name": "Links View",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Linksfield Road",
+          "short_name": "Linksfield Rd",
+          "types": [
+            "route"
+          ]
+        },
+        {
+          "long_name": "Aberdeen",
+          "short_name": "Aberdeen",
+          "types": [
+            "postal_town"
+          ]
+        },
+        {
+          "long_name": "Aberdeen City",
+          "short_name": "Aberdeen City",
+          "types": [
+            "administrative_area_level_2",
+            "political"
+          ]
+        },
+        {
+          "long_name": "Scotland",
+          "short_name": "Scotland",
+          "types": [
+            "administrative_area_level_1",
+            "political"
+          ]
+        },
+        {
+          "long_name": "United Kingdom",
+          "short_name": "GB",
+          "types": [
+            "country",
+            "political"
+          ]
+        },
+        {
+          "long_name": "AB24 5RG",
+          "short_name": "AB24 5RG",
+          "types": [
+            "postal_code"
+          ]
+        }
+      ],
+      "formatted_address": "75 Links View, Linksfield Rd, Aberdeen AB24 5RG, UK",
+      "geometry": {
+        "location": {
+          "lat": 57.1624294,
+          "lng": -2.0896456
+        },
+        "location_type": "ROOFTOP",
+        "viewport": {
+          "south": 57.1610748197085,
+          "west": -2.091065380291502,
+          "north": 57.1637727802915,
+          "east": -2.088367419708498
+        }
+      },
+      "place_id": "ChIJUwGQmBIOhEgROE6rQDv4vGw",
+      "plus_code": {
+        "compound_code": "5W66+X4 Aberdeen, UK",
+        "global_code": "9C9V5W66+X4"
+      },
+      "types": [
+        "street_address"
+      ]
+    }
+  ]
+}

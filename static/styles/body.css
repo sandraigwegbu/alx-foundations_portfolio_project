@@ -1,0 +1,68 @@
+html {
+  height: 100%;
+}
+
+body {
+  max-width: 1400px;
+  margin: 0;
+  padding: 0;
+  /*height: 100%;*/
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(171, 219, 243) url(../images/solar-background.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /*background-size: 1230px 1324px;*/
+  background-size: cover;
+  width: auto;
+
+  justify-content: space-between;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-flow: nowrap;
+  align-items: stretch;
+  justify-items: center;
+  /*border: 1px red solid;*/
+  text-shadow: 2px 2px grey;
+}
+.main input {
+  font-size: 20px;
+  border: none;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.main label {
+  font-size: 16px;
+}
+
+.calculated input,
+#timeZone {
+  background-color: darkgrey;
+}
+
+.login:hover,
+.calculate:hover {
+  opacity: 70%;
+}
+
+.calculate,
+.login {
+  font-size: 24px;
+  background-color: rgb(52, 114, 172);
+  color: white;
+  height: 48px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  margin: 0px 20px;
+}
+
+.login {
+  color: rgba(49, 49, 49, 0.555);
+}
