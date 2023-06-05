@@ -1,6 +1,7 @@
 footer {
-  background-color: rgb(75, 150, 32);
-  color: blue;
+  background-color: rgb(207, 207, 170);
+  color: black;
+  font-size: 20px;
   height: 100px;
   width: 100%;
   /*border-top: 1px solid #cccccc;*/

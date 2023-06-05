@@ -62,8 +62,8 @@ def home():
         # determine cosPhi - panelSunZenithCosine
         cosPhi = panelSunZenithCosine(
             panelAzimuth, panelSlope, sunAzimuth, sunElevation)
-        solarGeo = (round(cosPhi, 2)) if (round(cosPhi, 2) > 0) \
-            else ("#NA (panel in shaddow)")
+        solarGeo = ("%0.2f" % round(cosPhi, 2)) if (round(cosPhi, 3) > 0 and sunElevation > 0) \
+            else ("#NA (panel in shadow)")
         # print("solarGeo: ", solarGeo)
         # print("\nLatitude: {}\n Longitude: {}".format(latitude, longitude))
         return render_template("solargeometry_form_and_session.html",

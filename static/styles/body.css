@@ -3,12 +3,12 @@ html {
 }
 
 body {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0;
   padding: 0;
   /*height: 100%;*/
   font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  /*font-size: 20px; */
+  font-size: 24px;
   display: flex;
   flex-direction: column;
   background: rgb(171, 219, 243) url(../images/solar-background.jpg);
@@ -18,7 +18,7 @@ body {
   background-size: cover;
   width: auto;
 
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .main {
   display: flex;
@@ -27,7 +27,7 @@ body {
   align-items: stretch;
   justify-items: center;
   /*border: 1px red solid;*/
-  text-shadow: 2px 2px grey;
+  text-shadow: 0.05em 0.05em grey;
 }
 
 .main input {
@@ -39,7 +39,8 @@ body {
 }
 
 .main label {
-  font-size: 16px;
+  font-size: 18px;
+  /*font-weight: lighter; */
 }
 
 .calculated input,
@@ -58,10 +59,11 @@ body {
   background-color: rgb(52, 114, 172);
   color: white;
   height: 48px;
-  width: 20%;
+  width: 22%;
   border: none;
   border-radius: 4px;
   margin: 0px 20px;
+  padding: 0px 20px;
 }
 
 .login {
