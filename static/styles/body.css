@@ -80,6 +80,15 @@ body {
   padding: 0px 40px;
 }
 
+.userInput label {
+  font-size: 22px;
+}
+
 .userInput input {
   width: 12em;
+}
+
+.aboutSGF p {
+  text-align: justify;
+  text-justify: inter-word;
 }
