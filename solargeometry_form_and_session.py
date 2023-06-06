@@ -34,11 +34,20 @@ def home():
         session["timeString"] = timeString
 
         (latitude, longitude) = latlng(city)  # debug
+        if latitude is None or longitude is None:
+            return render_template("solargeometry_form_and_session.html",
+                                   city="Unknown location")
         tz_json = timeZone(latitude, longitude, dateString,
                            timeString)  # resume
         # tz = tz_json["rawOffset"]/3600
-        tz = (tz_json["rawOffset"] + tz_json["dstOffset"]) / \
-            3600  # corrected for dst
+        # print("TZ JSON: ", tz_json)  # debug
+
+        try:
+            tz = (tz_json["rawOffset"] + tz_json["dstOffset"]) / \
+                3600  # corrected for dst
+        except KeyError:  # eg for Kazakhstan!!!
+            return render_template("solargeometry_form_and_session.html",
+                                   city="Unknown location")
         timeZoneId = tz_json["timeZoneId"]
         timeZoneName = tz_json["timeZoneName"]
         timeZoneInfo = (f"UTC+{tz}: {timeZoneId}") if (tz >
@@ -50,37 +59,41 @@ def home():
         session["lng"] = longitude
 
         # call NOAA spreadsheet to compute key results
-        (sunAzimuth, sunElevation, sunHours, solarNoon) = noaa(
+        (sunAzimuth, sunElevation, sunHours, sunrise, solarNoon, sunset) = noaa(
             latitude, longitude, dateString, timeString)
 
         # store NOAA results in session
         session["sunAzimuth"] = sunAzimuth
         session["sunElevation"] = sunElevation
         session["sunHours"] = sunHours
+        session["sunrise"] = sunrise
         session["solarNoon"] = solarNoon
+        session["sunset"] = sunset
 
         # determine cosPhi - panelSunZenithCosine
         cosPhi = panelSunZenithCosine(
             panelAzimuth, panelSlope, sunAzimuth, sunElevation)
-        solarGeo = ("%0.2f" % round(cosPhi, 2)) if (round(cosPhi, 3) > 0 and sunElevation > 0) \
-            else ("#NA (panel in shadow)")
+        # solarGeo = ("%0.2f" % round(cosPhi, 2)) if (round(cosPhi, 3) > 0 and sunElevation > 0) \
+        #    else ("#NA (panel in shadow)")
+        solarGeo = ("%0.2f" % round(cosPhi, 2))
+
         # print("solarGeo: ", solarGeo)
         # print("\nLatitude: {}\n Longitude: {}".format(latitude, longitude))
         return render_template("solargeometry_form_and_session.html",
                                solarGeo=solarGeo, city=city, panelSlope=panelSlope,
                                panelAzimuth=panelAzimuth, dateString=dateString, timeString=timeString,
-                               timeZoneInfo=timeZoneInfo, lat=round(
+                               timeZoneInfo=timeZoneInfo, timeZoneName=timeZoneName, lat=round(
                                    latitude, 6),
-                               lng=round(longitude, 6), sunAzimuth=round(sunAzimuth, 1), sunElevation=round(sunElevation, 1),
-                               sunHours=round(sunHours, 2), solarNoon=f"{solarNoon} {timeZoneName}")
+                               lng=round(longitude, 6), sunAzimuth=("%0.1f" % round(sunAzimuth, 1)), sunElevation=("%0.1f" % round(sunElevation, 1)),
+                               sunHours=round(sunHours, 2), sunrise=f"{sunrise}", solarNoon=f"{solarNoon}", sunset=f"{sunset}")
     else:
         # print("GET______")
         # get(key[,default])
         if "city" in session:
             return render_template("solargeometry_form_and_session.html",
-                                   city=session.get("city"), panelSlope=session.get("panelSlope"))  # , \
-            # panelAzimuth=session["panelAzimuth"], dateString=session["dateString"], \
-            # timeString=session["timeString"], timeZoneInfo=session["timeZoneInfo"])
+                                   city=session.get("city"), panelSlope=session.get("panelSlope"),
+                                   panelAzimuth=session.get("panelAzimuth"), dateString=session.get("dateString"),
+                                   timeString=session.get("timeString"))
         return render_template("solargeometry_form_and_session.html")
 
 
@@ -89,9 +102,13 @@ def latlng(city):
     url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + \
         city + "&key=" + GOOGLE_API_KEY
     response = requests.get(url)
-    location = response.json()["results"][0]["geometry"]["location"]
-    latitude = location["lat"]
-    longitude = location["lng"]
+    try:
+        location = response.json()["results"][0]["geometry"]["location"]
+        latitude = location["lat"]
+        longitude = location["lng"]
+    except IndexError as e:
+        latitude = None
+        longitude = None
     return (latitude, longitude)
 
 
@@ -121,7 +138,7 @@ def isoDate(dateString):
     splitDate = dateString.rsplit('/')
     # return f"{splitDate[2]}-{splitDate[1]}-{splitDate[0]}"
     # pad single digit dd or mm with zero; future: qc yy instead of yyyy input
-    print("dateString: ", dateString, "split: ", splitDate)
+    # print("dateString: ", dateString, "split: ", splitDate)
     return "%04d-%02d-%02d" % (int(splitDate[2]), int(splitDate[1]),
                                int(splitDate[0]))
 
@@ -204,8 +221,10 @@ def noaa(latitude, longitude, dateString, timeString):
     # earlier deducted fro user input prior to calculating this spreadsheet)
     solarNoon = (720.0 - 4.0 * longitude - eqOfTime + float(tz)
                  * 60.0) / 1440.0 + dstOffset / 86400.0
-    sunriseTime = solarNoon-haSunrise * 4 / 1440 + dstOffset / 86400.0
-    sunsetTime = solarNoon + haSunrise * 4 / 1440 + dstOffset / 86400.0
+    # + dstOffset / 86400.0 (double add! caused bug!)
+    sunriseTime = solarNoon-haSunrise * 4 / 1440
+    # + dstOffset / 86400.0 (double add! casued bug!)
+    sunsetTime = solarNoon + haSunrise * 4 / 1440
     sunlightDuration = 8 * haSunrise
     trueSolarTime = fmod2(tm * 1440 + eqOfTime + 4 *
                           longitude - 60 * float(tz), 1440)
@@ -259,11 +278,14 @@ def noaa(latitude, longitude, dateString, timeString):
     print(obliqCorr, sunRtAscen, sunDeclin, varY, eqOfTime)
     print(haSunrise, fracDaytoTime(solarNoon), fracDaytoTime(
         sunriseTime), fracDaytoTime(sunsetTime))
+    print(solarNoon, sunriseTime, sunsetTime)
     print(sunlightDuration, trueSolarTime, hourAngle)
     print(solarZenithAngle, solarElevAngle, approxAtmRefraction,
           solarElevCorrForAtmRefraction, solarAzimuthAngle)
     # (170.3, 45.1, 5.2, '12:08')
-    return (solarAzimuthAngle, solarElevAngle, sunlightDuration / 60, fracDaytoTime(solarNoon, seconds=False))
+    return (solarAzimuthAngle, solarElevAngle, sunlightDuration / 60, fracDaytoTime(
+        sunriseTime, seconds=False), fracDaytoTime(solarNoon, seconds=False),
+        fracDaytoTime(sunsetTime, seconds=False))
 
 
 def fmod2(a, b):

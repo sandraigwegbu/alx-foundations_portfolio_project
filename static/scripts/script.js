@@ -38,23 +38,47 @@ window.addEventListener("DOMContentLoaded", (event) => {
 //xhr.send(formData);
 //
 
-//const btn = document.querySelector("button");
+//const btn = document.querySelector(".calculate");
 /*
 function random(number) {
   return Math.floor(Math.random() * (number + 1));
 }*/
+
+//btn.addEventListener("click", () => {
+//alert("Hello");
+//city = document.getElementById("city");
+//if (city.innerText === "Unknown city") {
+// alert("Unknown city");
+//}
+//console.log("Hello");
+//document.querySelector("#result").setAttribute("hidden", "False");
+//});
+/* if geoOutput is negative; set geoResultText display to none.
+var btn = document.querySelector("calculate");
+*/
 /*
-btn.addEventListener("click", () => {
-  alert("Hello");
-  console.log("Hello");
-  //document.querySelector("#result").setAttribute("hidden", "False");
-});*/
 function checkResult() {
+  alert("Here");
   geoResultText = document.getElementById("geoResultText");
   geoOutput = document.getElementById("geoOutput");
-
-  if (geoOutput.innerText.startsWith("#")) {
-    geoResultText.innerHTML = "The solar panel is fully shaded.";
-  }
-  //document.getElementById("result").getAttribute("name");
+  alert("Here");
+  alert(geoResultText.innerHTML);
+  alert(geoOutput.value);
+*/
+geoResultText = document.getElementById("geoResultText");
+geoOutput = document.getElementById("geoOutput");
+//dateString = document.getElementById("dateString");
+//alert(dateStrin);
+if (geoOutput.value.startsWith("-")) {
+  //alert("Yes - negative");
+  geoResultText.innerHTML =
+    "<h3 style='color:red; margin-bottom: 0; padding-bottom:0'>The solar panel is fully shaded.</h3></br><em style='margin-top:0; padding-top:0'>(The Solar Geometry Factor is zero.)</em>";
+  // geoResultText.style.display = "none";
+} else if (geoOutput.value === "") {
+  geoResultText.innerHTML =
+    "<em style='color: blue;'>Fill in the <span style='opacity: 100%; padding: 0.5em; border-radius: 8px; background-color: white; color: black;'>white</span> cells above and press <strong>Calculate</strong>.</em>";
+} else {
+  geoResultText.style.display = "block";
 }
+
+//document.getElementById("result").getAttribute("name");

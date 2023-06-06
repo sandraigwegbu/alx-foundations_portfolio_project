@@ -43,9 +43,12 @@ body {
   /*font-weight: lighter; */
 }
 
-.calculated input,
-#timeZone {
+.calculated input {
   background-color: darkgrey;
+}
+
+#timeZoneInfo {
+  background-color: transparent;
 }
 
 .login:hover,
@@ -53,19 +56,30 @@ body {
   opacity: 70%;
 }
 
-.calculate,
 .login {
+  font-size: 24px;
+  background-color: rgb(52, 114, 172);
+  color: rgba(49, 49, 49, 0.555);
+  height: 48px;
+  width: fit-content;
+  border: none;
+  border-radius: 4px;
+  margin: 0px 20px;
+  padding: 0px 40px;
+}
+
+.calculate {
   font-size: 24px;
   background-color: rgb(52, 114, 172);
   color: white;
   height: 48px;
-  width: 22%;
+  width: fit-content;
   border: none;
   border-radius: 4px;
   margin: 0px 20px;
-  padding: 0px 20px;
+  padding: 0px 40px;
 }
 
-.login {
-  color: rgba(49, 49, 49, 0.555);
+.userInput input {
+  width: 12em;
 }
