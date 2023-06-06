@@ -35,8 +35,13 @@ def home():
 
         (latitude, longitude) = latlng(city)  # debug
         if latitude is None or longitude is None:
+            session["city"] = "Unknown location: {}".format(session["city"])
+            initSession(session)
             return render_template("solargeometry_form_and_session.html",
-                                   city="Unknown location")
+                                   city=session.get("city"), panelSlope=session.get("panelSlope"),
+                                   panelAzimuth=session.get("panelAzimuth"), dateString=session.get("dateString"),
+                                   timeString=session.get("timeString"))
+
         tz_json = timeZone(latitude, longitude, dateString,
                            timeString)  # resume
         # tz = tz_json["rawOffset"]/3600
@@ -46,8 +51,13 @@ def home():
             tz = (tz_json["rawOffset"] + tz_json["dstOffset"]) / \
                 3600  # corrected for dst
         except KeyError:  # eg for Kazakhstan!!!
+            session["city"] = "Unknown location: {}".format(session["city"])
+            initSession(session)
             return render_template("solargeometry_form_and_session.html",
-                                   city="Unknown location")
+                                   city=session.get("city"), panelSlope=session.get("panelSlope"),
+                                   panelAzimuth=session.get("panelAzimuth"), dateString=session.get("dateString"),
+                                   timeString=session.get("timeString"))
+
         timeZoneId = tz_json["timeZoneId"]
         timeZoneName = tz_json["timeZoneName"]
         timeZoneInfo = (f"UTC+{tz}: {timeZoneId}") if (tz >
@@ -86,15 +96,38 @@ def home():
                                    latitude, 6),
                                lng=round(longitude, 6), sunAzimuth=("%0.1f" % round(sunAzimuth, 1)), sunElevation=("%0.1f" % round(sunElevation, 1)),
                                sunHours=round(sunHours, 2), sunrise=f"{sunrise}", solarNoon=f"{solarNoon}", sunset=f"{sunset}")
+
+    initSession(session)
+
+    # if "city" in session: (still necessary?)
+    return render_template("solargeometry_form_and_session.html",
+                           city=session.get("city"), panelSlope=session.get("panelSlope"),
+                           panelAzimuth=session.get("panelAzimuth"), dateString=session.get("dateString"),
+                           timeString=session.get("timeString"))
+    # return render_template("solargeometry_form_and_session.html")
+
+
+def initSession(session):
+    print("SESSION:", session)  # debug - what is in it?
+
+    if session.get("panelSlope") is None:
+        print("Empty string for panel slope")
+        session["panelSlope"] = 0
     else:
-        # print("GET______")
-        # get(key[,default])
-        if "city" in session:
-            return render_template("solargeometry_form_and_session.html",
-                                   city=session.get("city"), panelSlope=session.get("panelSlope"),
-                                   panelAzimuth=session.get("panelAzimuth"), dateString=session.get("dateString"),
-                                   timeString=session.get("timeString"))
-        return render_template("solargeometry_form_and_session.html")
+        print("Not empty slope")
+
+    if session.get("panelAzimuth") is None:
+        print("Empty string for panel direction")
+        session["panelAzimuth"] = 0
+    else:
+        print("Not empty direction")
+
+    if session.get("dateString") is None:
+        session["dateString"] = datetime.today().strftime("%Y-%m-%d")
+
+    if session.get("timeString") is None:
+        session["timeString"] = datetime.today().strftime("%H:%M")
+    return
 
 
 def latlng(city):
