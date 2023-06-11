@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solar Geometry Calculator</title>
+    <link rel="stylesheet" href="../static/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="../static/styles/footer.css" type="text/css" />
+    <link rel="stylesheet" href="../static/styles/body.css" type="text/css" />
+    <!--<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />-->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  </head>
+  <body class="landingPageBody" style="max-width: 1536px">
+    <header></header>
+
+    <nav class="navbar">
+      <div class="navContainer">
+        <a
+          class="welcomeMenu menu"
+          href="https://solargeometry.igwegbu.tech"
+          style="flex: 1 1 23%; width: 17%; text-align: center"
+          >Welcome</a
+        >
+        <a
+          class="calculateMenu menu"
+          href="https://solargeometry.igwegbu.tech/calculator.html?"
+          style="flex: 1 0 23%; width: 27%; text-align: center"
+          >Calculator</a
+        >
+        <a
+          class="menu"
+          href="https://solargeometry.igwegbu.tech/docs.html?"
+          style="flex: 1 2 23; width: 20%; text-align: center"
+          >Docs</a
+        >
+        <a
+          class="menu"
+          href="https://solargeometry.igwegbu.tech/go-solar.html?"
+          style="flex: 1 1 23%; width: 20%; text-align: center"
+          >Go Solar</a
+        >
+      </div>
+    </nav>
+    <section
+      class="landingPage"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background-color: rgb(211, 216, 224);
+      "
+    >
+      <h1
+        style="
+          margin-bottom: 20px;
+          color: blue;
+          font-size: 3em;
+          text-shadow: 0.06em 0.06em grey;
+        "
+      >
+        Solar Geometry Calculator<sup style="font-size: 40px; margin: auto 5px"
+          >&reg;</sup
+        >
+      </h1>
+      <!--This package includes the image and description-->
+      <section
+        class="lpSplashImage"
+        style="
+          display: flex;
+          flex-direction: column;
+          max-width: 1536px;
+
+          height: auto;
+
+          background: url(../static/images/solar-panel-installers-on-roof.png);
+          background-position: center;
+          background-repeat: no-repeat;
+
+          background-size: contain;
+        "
+      >
+        <h3 style="z-index: 1; margin: 10px 0 20px 0">
+          <em>
+            "By how much is that sloping roof ruining your bright solar idea?"
+          </em>
+        </h3>
+        <!--        <img
+          src="../static/images/solar-panel-installers-on-roof.png2"
+          alt="Technicians installing solar panels on a roof"
+          style="
+            max-height: 35%;
+            align-self: center;
+            flex: 0;
+            position: absolute;
+            z-index: 0;
+          "
+        /> -->
+        <div
+          class="description"
+          style="
+            max-width: 94%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: center;
+            z-index: 2;
+          "
+        >
+          <em
+            style="
+              font-size: 16px;
+              color: blue;
+              text-align: justify;
+              text-justify: inter-word;
+            "
+          >
+            Well, it's complicated...
+            <p>
+              When it comes to solar energy, what you pay for is not exactly
+              what you get: your roof direction and slope, and your location on
+              Earth, plus the day in the year and time of the day, will all have
+              a say in the matter. Not to mention the weather! But the good news
+              is that in just a few clicks and seconds our app can help you take
+              the guess work out of at least the geometrical aspects of this
+              very important question. We will leave the weather side of the
+              story for a “rainy” day…
+            </p>
+          </em>
+          <form id="getStarted" action="/calculator.html" method="get">
+            <button
+              class="landingPageButton"
+              id="landingPageButton"
+              style="
+                font-size: 30px;
+                border-radius: 8px;
+                font-weight: bolder;
+                color: white;
+                background-color: #ff5a5f;
+                margin: 0 20px 170%;
+              "
+            >
+              Get Started
+            </button>
+          </form>
+        </div>
+      </section>
+      <div style="margin: 0 2em">
+        <h2 style="margin-top: 30px; align-self: center; position: relative">
+          Quickly assess the impact of:
+        </h2>
+      </div>
+      <!--Features section--->
+      <a href="https://solargeometry.igwegbu.tech/calculator.html?">
+        <div
+          class="features"
+          style="
+            max-width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: first baseline;
+            margin: 0 10px 30px 10px;
+            position: relative;
+            border: 10px solid white;
+            border-radius: 20px;
+            padding-left: 10px;
+            background-color: black;
+            color: white;
+          "
+        >
+          <div
+            style="
+              width: 25%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin: 20px 0 0 0;
+              flex: 1 1.3 100%;
+            "
+          >
+            <img
+              src="../static/images/earth-pin-drops.png"
+              style="
+                border-radius: 50%;
+
+                width: 90%;
+                height: 90%;
+              "
+              alt="Earth Locations"
+            />
+
+            <h5 style="text-align: center">Location</h5>
+          </div>
+          <div
+            style="
+              width: 25%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 0 1 80%;
+            "
+          >
+            <img
+              src="../static/images/solar-background.jpg"
+              style="width: 80%; height: auto; margin: 10% 5% 5% 5%"
+              alt="panel_placement"
+              style="margin: 2%; width: 80%; height: 20%"
+            />
+            <h5 style="text-align: center">Orien-tation</h5>
+          </div>
+
+          <div
+            style="
+              width: 25%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 0 1 80%;
+            "
+          >
+            <img
+              src="../static/images/earth-seasons.png"
+              style="
+                width: 80%;
+                height: auto;
+
+                background-color: black;
+              "
+              alt="Earth Seasons"
+            />
+            <h5 style="text-align: center">Day of Year</h5>
+          </div>
+
+          <div
+            style="
+              width: 25%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 0 1 80%;
+            "
+          >
+            <img
+              src="../static/images/day-night.png"
+              style="width: 60%; height: auto; border-radius: 100%"
+              alt="Day-and-Night"
+            />
+            <h5 style="text-align: center">Time of Day</h5>
+          </div>
+        </div></a
+      >
+      <!--About SGC package-->
+      <div
+        class="aboutSGC"
+        style="
+          background-color: beige;
+
+          font-size: 20px;
+          height: auto;
+          width: 100%;
+          /*border-top: 1px solid #cccccc;*/
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+
+          position: relative;
+          z-index: 1;
+          padding: 10px 0 120px;
+        "
+      >
+        <h3>About Solar Geometry Calculator</h3>
+        <p
+          style="
+            width: 90%;
+            text-align: justify;
+            text-justify: inter-word;
+            padding: 10px 20px;
+          "
+        >
+          <em>Solar Geometry Calculator</em> was inspired by the experience of
+          the developer in trying to help many people retrofit solar panels on
+          their roof. The tool is handy for quickly assessing the impact of roof
+          orientation, location, date and time on solar panel efficiency,
+          especially at the project conceptual stage. The term Solar Geometry
+          Factor" was also first coined by the developer, drawing from his years
+          of experience in science and engineering practice. The tool has been
+          developed in partial fulfilment of the requirements for a Software
+          Engineering programme offered by
+          <a href="https://www.alxafrica.com/software-engineering/"
+            >ALX-Africa</a
+          >. The tool uses industry-standard libraries and APIs to ensure
+          accurate results, notably the Google Geocoding and Time Zone APIs and
+          models of the Earth and Sun published by the US National Oceanic &
+          Atmospheric Administration. <br />
+          The developer also offers high-end solar energy installation services
+          for corporate clients and large organisations.
+        </p>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <a href="https://www.twitter.com/kpakpando1">
+            <img
+              src="../static/images/twitter-logo.png"
+              alt="Twitter Logo"
+              style="width: 2em; margin: 1em"
+          /></a>
+          <a href="https://www.github.com/ecigwegbu"
+            ><img
+              src="../static/images/github-logo.png"
+              alt="GitHub Logo"
+              style="width: 2em; margin: 1em"
+          /></a>
+          <a href="https://ng.linkedin.com/in/elias-igwegbu-b9b806b2"
+            ><img
+              src="../static/images/linkedin-logo.png"
+              alt="LinkedIn Logo"
+              style="width: 2em; margin: 1em"
+          /></a>
+        </div>
+      </div>
+      <h2>Video Demo - How it Works</h2>
+      <video controls width="50%" style="margin-bottom: 300px">
+        <source src="../static/images/sgc-video.mp4" type="video/mp4" />
+
+        View the
+        <a href="../static/images/sgc-video.mp4">MP4</a>
+        video.
+      </video>
+      <div
+        style="
+          color: black;
+
+          height: 100px;
+          width: 100%;
+
+          border-top: 1px solid #cccccc;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+
+          z-index: 2;
+          background-color: beige;
+        "
+      >
+        <small>&copy; 2023. MannedModule Inc. All Rights Reserved.</small>
+        <small
+          ><a href="#" title="The Small Prints">Terms and Conditions</a></small
+        >
+        <small
+          >#Do.Hard.Things&reg;&trade;@ALX-Cohort-9.
+          <a
+            href="mailto:admin@igwegbu.tech"
+            title="Get in touch with an agent now."
+            >Contact Us</a
+          ></small
+        >
+      </div>
+    </section>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&callback=initMap&v=weekly"
+      defer
+    ></script>
+    <script src="../static/scripts/script.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

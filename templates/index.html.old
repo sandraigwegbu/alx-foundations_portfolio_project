@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <title>Solar Geometry Calculator</title>
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/body.css" />
+    <script src="scripts/geocode.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  </head>
+  <body>
+    <header></header>
+    <nav
+      class="navbar"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 70px;
+        background-color: beige;
+      "
+    >
+      <button class="calculate">Calculate</button>
+      <h3>Solar Geometry Calculator</h3>
+      <p>Version 1.0</p>
+      <button class="login">Login</button>
+    </nav>
+
+    <section class="main">
+      <div
+        class="userInput"
+        style="
+          border: 1px solid green;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          margin: 20px;
+          border-radius: 12px;
+          padding: 0px 20px 20px;
+        "
+      >
+        <h3>UserInput</h3>
+        <div>
+          <label for="city">City: </label
+          ><input type="text" id="city" placeholder="Enugu" />
+        </div>
+
+        <div>
+          <label for="panelslope">Panel Slope [deg]: </label
+          ><input type="text" id="panelslope" placeholder="25" />
+        </div>
+        <div>
+          <label for="azimuth">Panel Direction: </label
+          ><input type="text" id="azimuth" placeholder="South" />
+        </div>
+        <div>
+          <label for="date">Date [dd/mm/yyyy]: </label>
+          <input type="text" id="date" placeholder="19/08/2023" />
+        </div>
+
+        <div>
+          <label for="time">Time [hh:mm(/24)]: </label>
+          <input type="text" id="time" placeholder="13:25" />
+        </div>
+
+        <div>
+          <label for="timezone">Timezone: </label
+          ><input type="text" id="timezone" placeholder="+1" />
+        </div>
+      </div>
+      <div
+        class="calculated"
+        style="
+          border: 1px solid green;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          margin: 20px;
+          border-radius: 12px;
+          padding: 0px 20px 20px;
+        "
+      >
+        <h3>Calculated</h3>
+        <div>
+          <label for="latitude">Latitude [deg]: </label
+          ><input type="text" id="latitude" placeholder="6.7 N" readonly />
+        </div>
+
+        <div>
+          <label for="longitude">Longitude [deg]: </label
+          ><input type="text" id="slope" placeholder="7.2" readonly />
+        </div>
+        <div>
+          <label for="sunAzimuth">Sun's Azimuth [deg]: </label
+          ><input type="text" id="sunAzimuth" placeholder="60" readonly />
+        </div>
+        <div>
+          <label for="elevation">Sun's Elevation [deg]: </label>
+          <input type="text" id="elevation" placeholder="55" readonly />
+        </div>
+
+        <div>
+          <label for="sunhours">Sun hours per day: </label>
+          <input type="text" id="sunhours" placeholder="7.5" readonly />
+        </div>
+
+        <div>
+          <label for="solarNoon">Solar Noon: </label
+          ><input type="text" id="solarNoon" placeholder="12:13" readonly />
+        </div>
+      </div>
+      <div class="Picture">
+        <h3><!--Picture--></h3>
+      </div>
+    </section>
+    <section
+      class="result"
+      style="
+        display: block;
+        width: fit-content;
+        align-self: center;
+        margin-top: 20px;
+        background-color: beige;
+        border: none;
+        border-radius: 12px;
+        opacity: 50%;
+        padding: 0px 40px;
+      "
+    >
+      <h2><u>Result:</u></h2>
+      <h3>
+        The Solar Geometry Factor is
+        <output style="background-color: greenyellow; padding: 10px"
+          >0.45</output
+        >.
+      </h3>
+    </section>
+
+    <footer>
+      <small>&copy; 2023. MannedModule Inc. All Rights Reserved.</small>
+      <small
+        ><a href="http://solargeometry.igwegbu.tech" title="The Small Prints"
+          >Terms and Conditions</a
+        ></small
+      >
+      <small
+        >#Do.Hard.Things&reg;&trade;@ALX-Cohort-9.
+        <a
+          href="mailto:admin@igwegbu.tech"
+          title="Get in touch with an agent now"
+          >Contact Us</a
+        ></small
+      >
+    </footer>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbFfxRSEX7lzsTppdQshiE3G-i5nGgPsQ&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>

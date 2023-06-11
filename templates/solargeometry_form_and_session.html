@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <title>Solar Geometry Calculator</title>
+    <link rel="stylesheet" href="../static/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="../static/styles/footer.css" type="text/css" />
+    <link rel="stylesheet" href="../static/styles/body.css" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  </head>
+  <body class="calculatorBody" onload="checkResult()">
+    <header></header>
+
+    <nav class="navbar">
+      <div class="navContainer">
+        <a
+          class="welcomeMenu menu"
+          href="https://solargeometry.igwegbu.tech"
+          style="flex: 1 1 23%; width: 17%; text-align: center"
+          >Welcome</a
+        >
+        <a
+          class="calculateMenu menu"
+          href="https://solargeometry.igwegbu.tech/calculator.html?"
+          style="flex: 1 0 23%; width: 27%; text-align: center"
+          >Calculator</a
+        >
+        <a
+          class="menu"
+          href="https://solargeometry.igwegbu.tech/docs.html?"
+          style="flex: 1 2 23; width: 20%; text-align: center"
+          >Docs</a
+        >
+        <a
+          class="menu"
+          href="https://solargeometry.igwegbu.tech/go-solar.html?"
+          style="flex: 1 1 23%; width: 20%; text-align: center"
+          >Go Solar</a
+        >
+      </div>
+    </nav>
+    <form id="myForm" action="#" method="post">
+      <nav
+        class="calcbar"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 100px;
+          background-color: beige;
+          padding: 0 25px 20px 25px;
+          margin: 40px auto;
+        "
+      >
+        <!--<h2>Solar Geometry Calculator</h2>-->
+        <h2
+          style="
+            margin: 50px 0 30px;
+            color: blue;
+            font-size: 3em;
+            text-shadow: 0.08em 0.08em grey;
+          "
+        >
+          Solar Geometry Calculator<sup
+            style="font-size: 40px; margin: auto 5px"
+            >&reg;</sup
+          >
+        </h2>
+        <div
+          style="
+            width: fit-content;
+            font-size: smaller;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          "
+        >
+          <p
+            style="
+              display: flex;
+              flex-wrap: nowrap;
+              margin-bottom: 0;
+              padding-bottom: 0;
+              width: fit-content;
+              color: black;
+            "
+          >
+            Version
+          </p>
+          <p
+            style="
+              margin-top: 0;
+              padding-top: 0;
+              text-align: center;
+              color: blueviolet;
+            "
+          >
+            1.0-Beta
+          </p>
+        </div>
+        <button class="login" hidden="True">Login</button>
+      </nav>
+
+      <!--I/O Section - two articles-->
+      <section class="main" style="display: flex; justify-content: center">
+        <!--User Input-->
+        <article
+          class="userInput"
+          style="
+            border: 1px solid green;
+            display: flex;
+            flex-direction: column;
+            align-items: self-end;
+            margin: 20px;
+            border-radius: 12px;
+            padding: 0px 20px 20px;
+            min-width: 44%;
+          "
+        >
+          <h3 style="align-self: center">User Input</h3>
+          <div>
+            <label for="city">City: </label
+            ><input
+              type="text"
+              id="city"
+              placeholder="Enter city name"
+              name="city"
+              value="{{ city if city }}"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="panelSlope">Panel Slope [deg]: </label
+            ><input
+              type="number"
+              id="panelSlope"
+              title="Enter panel slope in degrees"
+              name="panelSlope"
+              min="0"
+              max="90"
+              value="{{ panelSlope if panelSlope else 0}}"
+              required
+            />
+          </div>
+          <div>
+            <div style="display: inline-block; width: 250px; margin-top: 0.5em">
+              <label for="panelAzimuth">Panel Direction. [deg] </label
+              ><label for="panelAzimuth">(+ve CW from North): </label>
+            </div>
+            <input
+              type="number"
+              id="panelAzimuth"
+              title="Azimuth, clockwise from North"
+              name="panelAzimuth"
+              min="0"
+              max="360"
+              value="{{ panelAzimuth if panelAzimuth else 0}}"
+              style="padding-top: 1.5em"
+              required
+            />
+          </div>
+          <div>
+            <label for="dateString">Date:</label>
+            <input
+              type="date"
+              id="dateString"
+              name="dateString"
+              min="1970-01-01"
+              max="2100-12-31"
+              value="{{ dateString if dateString }}"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="timeString">Time [24hrs]: </label>
+            <input
+              type="time"
+              id="timeString"
+              placeholder="10:00"
+              name="timeString"
+              value="{{ timeString if timeString }}"
+              required
+            />
+          </div>
+
+          <ul
+            style="
+              font-size: smaller;
+
+              list-style-type: square;
+              margin-top: 2em;
+              padding: 1em 1em 0 2em;
+              align-self: center;
+              border: 1px beige dotted;
+              box-shadow: lightslategray 2px 2px;
+            "
+          >
+            <li>Enter your data in the cells above.</li>
+            <li>Press the button below.</li>
+            <li>Review the result below.</li>
+          </ul>
+
+          <button
+            class="calculate"
+            style="
+              margin-top: 1em;
+              align-self: center;
+              font-family: 'Franklin Gothic Medium';
+              text-shadow: 0.05em 0.05em black;
+              font-weight: bolder;
+            "
+          >
+            Calculate
+          </button>
+        </article>
+
+        <!--Calculated Data-->
+        <article
+          class="calculated"
+          style="
+            border: 1px solid green;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin: 20px;
+            border-radius: 12px;
+            padding: 0px 20px 20px;
+            min-width: 35%;
+          "
+        >
+          <h3 style="align-self: center">Calculated</h3>
+          <div>
+            <label for="latitude">Latitude [deg]: </label
+            ><input
+              type="text"
+              id="latitude"
+              name="lat"
+              value="{{ lat if lat }}"
+              readonly
+            />
+          </div>
+
+          <div>
+            <label for="longitude">Longitude [deg]: </label
+            ><input
+              type="text"
+              id="slope"
+              name="lng"
+              value="{{ lng if lng }}"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="sunAzimuth">Sun's Azimuth [deg]: </label
+            ><input
+              type="text"
+              id="sunAzimuth"
+              name="sunAzimuth"
+              value="{{ sunAzimuth if sunAzimuth }}"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="sunElevation">Sun's Elevation [deg]: </label>
+            <!-- debug: add this below and check placeholder="51.4"-->
+            <input
+              type="text"
+              id="sunElevation"
+              name="sunElevation"
+              value="{{ sunElevation if sunElevation }}"
+              readonly
+            />
+          </div>
+
+          <div>
+            <label for="sunsrise">Sunrise: </label
+            ><input
+              type="text"
+              id="sunrise"
+              name="sunrise"
+              value="{{ sunrise if sunrise }}"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="solarNoon">Solar Noon: </label
+            ><input
+              type="text"
+              id="solarNoon"
+              name="solarNoon"
+              value="{{ solarNoon if solarNoon }}"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="sunset">Sunset: </label
+            ><input
+              type="text"
+              id="sunset"
+              name="sunset"
+              value="{{ sunset if sunset }}"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="sunHours">Sun hours per day: </label>
+            <input
+              type="text"
+              id="sunHours"
+              name="sunHours"
+              value="{{ sunHours if sunHours }}"
+              readonly
+            />
+          </div>
+
+          <p
+            id="timeZoneInfo"
+            style="
+              margin-top: 0;
+              margin-bottom: 0;
+              display: block;
+              padding: 1em 1em 0 0;
+              font-size: 18px;
+              font-style: italic;
+              align-self: center;
+            "
+          >
+            <span>Time Zone: </span
+            ><span>{{ timeZoneInfo if timeZoneInfo}} </span>
+          </p>
+
+          <p
+            id="timeZoneName"
+            style="
+              margin-top: 0;
+              margin-bottom: 1em;
+              border-top: 0;
+              font-style: italic;
+              color: blue;
+              font-size: 20px;
+
+              padding: 0 1em 0 0;
+              align-self: center;
+            "
+            style="display: block; padding-top: 1em; text-align: center"
+          >
+            {{ timeZoneName if timeZoneName }}
+          </p>
+        </article>
+      </section>
+
+      <!--result section (NEW)-->
+      <article
+        style="
+          display: block;
+          align-self: center;
+          margin-top: 20px;
+          background-color: beige;
+          border-radius: 12px;
+          opacity: 60%;
+          padding: 20px 40px;
+        "
+      >
+        <div class="result" id="geoResult">
+          <h2><u>Result:</u></h2>
+          <span id="geoResultText">
+            <h2 style="display: inline-block">The Solar Geometry Factor is</h2>
+            <input
+              type="text"
+              readonly
+              id="geoOutput"
+              style="
+                font-size: 1.5em;
+                font-weight: bolder;
+                width: 2.5em;
+                height: 2em;
+                text-align: center;
+                border: 0.2em solid red;
+                margin-left: 0.3em;
+                border-radius: 50%;
+                background-color: transparent;
+              "
+              value="{{ solarGeo if solarGeo }}"
+            />
+          </span>
+        </div>
+      </article>
+
+      <section
+        class="result"
+        style="
+          display: block;
+          width: fit-content;
+          align-self: center;
+          margin-top: 20px;
+          background-color: beige;
+          border: none;
+          border-radius: 12px;
+          opacity: 60%;
+          padding: 20px 40px;
+          padding-bottom: 6em;
+        "
+      >
+        <div
+          class="aboutSGF"
+          style="font-size: 24px; border-top: 1px solid green"
+        >
+          <h3>About Solar Geometry Factor</h3>
+          <p>
+            Solar Geometry Factor (SGF) reflects the proportion of the solar
+            irradiance (solar energy per unit surface area) available at a given
+            location, date and time on Earth, that would be incident on a solar
+            panel. This factor is determined by the orientation of the panel
+            relative to direct sunlight. The SGF is equal to the dot product of
+            the unit vector pointing towards the sun and the unit normal vector
+            of the surface of the solar panel.
+          </p>
+          <p>
+            A panel directly facing the sun has a SGF of 1. For a horizontal
+            panel on Earth, due to the rotational and orbital motions of the
+            Earth, the SGF is affected by the latitude and longitude at the
+            location, the date and the time. A panel mounted on a sloping roof
+            can have a lower or higher SGF, compared to a horizontal panel at
+            the same location, date and time, depending on whether that slope
+            results in the panel tilting away from or towards the sun,
+            respectively. For a horizontal panel at any given location, date and
+            time, the SGF will increase from zero at sunrise, peaking at the
+            location's solar noon on that date, and decreasing again to zero at
+            sunset.
+          </p>
+          <p>
+            Besides the SGF, there are several other factors that affect the
+            amount of solar energy that can be generated by a solar panel, in
+            addition to the panel's own efficiency. These include the
+            atmospheric air mass, cloud cover, temperature and diffuse sunlight,
+            e.g., at dawn and dusk; these need to be considered separately when
+            designing a solar array for any application in practice.
+            Nevertheless, the SGF gives a good indication of the geometric
+            factors that will influence the design decisions.
+          </p>
+          <p>
+            <a
+              href="https://en.wikipedia.org/wiki/Position_of_the_Sun"
+              target="_blank"
+              >Learn more</a
+            >
+            about the position of the Sun in the sky as seen from the Earth
+            (leaves this site).
+          </p>
+        </div>
+      </section>
+    </form>
+    <div
+      style="
+        color: black;
+
+        height: 100px;
+        width: 100%;
+
+        border-top: 1px solid #cccccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        z-index: 2;
+        background-color: beige;
+      "
+    >
+      <small>&copy; 2023. MannedModule Inc. All Rights Reserved.</small>
+      <small
+        ><a href="#" title="The Small Prints">Terms and Conditions</a></small
+      >
+      <small
+        >#Do.Hard.Things&reg;&trade;@ALX-Cohort-9.
+        <a
+          href="mailto:admin@igwegbu.tech"
+          title="Get in touch with an agent now."
+          >Contact Us</a
+        ></small
+      >
+    </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&callback=initMap&v=weekly"
+      defer
+    ></script>
+    <script src="../static/scripts/script.js" defer></script>
+    <script></script>
+  </body>
+</html>
