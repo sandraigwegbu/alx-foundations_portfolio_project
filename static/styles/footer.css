@@ -1,14 +1,16 @@
 footer {
-  background-color: rgb(207, 207, 170);
+  background-color: beige;
   color: black;
   font-size: 20px;
   height: 100px;
-  width: 100%;
-  /*border-top: 1px solid #cccccc;*/
+  width: 1200px;
+  border-top: 1px solid #cccccc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   bottom: 0;
   position: fixed;
+  z-index: 2;
 }
+/*  background-color: rgb(207, 207, 170);  */

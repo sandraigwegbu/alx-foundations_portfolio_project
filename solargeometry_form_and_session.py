@@ -14,7 +14,15 @@ app.permanent_session_lifetime = timedelta(minutes=5)
 app.url_map.strict_slashes = False
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
+@app.route("/index.html", methods=["GET"])
+def root():
+    """index page"""
+    return render_template("index.html")
+    pass
+
+
+@app.route("/calculator.html", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
         # todo: check input complete and correct before processing     #resume

@@ -2,7 +2,7 @@ html {
   height: 100%;
 }
 
-body {
+.calculatorBody {
   max-width: 1200px;
   margin: 0;
   padding: 0;
@@ -20,6 +20,7 @@ body {
 
   justify-content: flex-start;
 }
+
 .main {
   display: flex;
   flex-direction: row;
@@ -39,12 +40,15 @@ body {
 }
 
 .main label {
-  font-size: 18px;
+  font-size: 24px;
   /*font-weight: lighter; */
 }
 
 .calculated input {
   background-color: darkgrey;
+  width: 150px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 #timeZoneInfo {
@@ -81,14 +85,48 @@ body {
 }
 
 .userInput label {
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .userInput input {
   width: 12em;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .aboutSGF p {
   text-align: justify;
   text-justify: inter-word;
+}
+.landingPage h1,
+.landingPage h2,
+.landingPage h3,
+.landingPage h4,
+.landingPage h5,
+.landingPage > p {
+  align-self: center;
+}
+.landingPageButton:hover {
+  opacity: 70%;
+}
+
+.landingPage .features div:hover {
+  border: solid 3px blue;
+}
+
+.navbar {
+  align-self: center;
+  margin: 20px;
+}
+.navbar .menu {
+  font-size: 30px;
+  font-weight: bolder;
+  border: solid 0.25em rgb(211, 216, 224);
+  background-color: rgb(211, 216, 224);
+  padding: 1em auto;
+}
+.navbar .menu:hover {
+  font-weight: bolder;
+  background-color: beige;
+  border: solid 0.25em beige;
 }
