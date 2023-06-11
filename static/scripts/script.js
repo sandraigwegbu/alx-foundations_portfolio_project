@@ -92,12 +92,12 @@ function checkResult() {
 //alert("The active menu is " + `$(activeMenu)`);
 
 //const landingPageButton = document.querySelector("landingPageButton");
-const landingPageButton = document.getElementById("landingPageButton");
-landingPageButton.addEventListener("click", (event) => {
-  //const welcomeMenu = document.getElementById("welcomeMenu");
-  //alert("Loading Calculator");
-  //alert(welcomeMenu.nodeValue);
-});
+//const landingPageButton = document.getElementById("landingPageButton");
+//landingPageButton.addEventListener("click", (event) => {
+//const welcomeMenu = document.getElementById("welcomeMenu");
+//alert("Loading Calculator");
+//alert(welcomeMenu.nodeValue);
+//});
 
 //unction loadCalculator() {
 //const activeMenu = document.getElementById("welcome");
@@ -110,3 +110,11 @@ landingPageButton.addEventListener("click", (event) => {
 // previousMenu.setAttribute("background-color", "red");
 //currentMenu.setAttribute("background-color", "blue");
 //}
+/*
+const navMenu = document.querySelectorAll(".menu");
+navMenu.forEach((menuItem) => {
+  menuItem.addEventListener("click", () => {
+    //alert("Menu Item Clicked");
+  });
+});
+*/

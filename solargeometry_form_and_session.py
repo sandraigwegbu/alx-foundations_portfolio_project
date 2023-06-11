@@ -19,7 +19,18 @@ app.url_map.strict_slashes = False
 def root():
     """index page"""
     return render_template("index.html")
-    pass
+
+
+@app.route("/docs.html", methods=["GET"])
+def docs():
+    """index page"""
+    return render_template("docs.html")
+
+
+@app.route("/go-solar.html", methods=["GET"])
+def goSolar():
+    """index page"""
+    return render_template("go-solar.html")
 
 
 @app.route("/calculator.html", methods=["GET", "POST"])

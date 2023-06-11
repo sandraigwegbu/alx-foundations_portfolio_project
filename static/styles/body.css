@@ -3,7 +3,7 @@ html {
 }
 
 .calculatorBody {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   /*height: 100%;*/
@@ -114,16 +114,18 @@ html {
   border: solid 3px blue;
 }
 
-.navbar {
-  align-self: center;
-  margin: 20px;
+.navContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  font-size: 100%;
+  margin: 5px 0 20px;
 }
 .navbar .menu {
-  font-size: 30px;
   font-weight: bolder;
-  border: solid 0.25em rgb(211, 216, 224);
+  border: solid 1px white;
   background-color: rgb(211, 216, 224);
-  padding: 1em auto;
+  padding: 0.5em auto;
 }
 .navbar .menu:hover {
   font-weight: bolder;
